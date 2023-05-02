@@ -12,8 +12,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <Heading mt={8}>AIレシピツクール</Heading>
-        <Image src="/vercel.svg" alt="Vercel Logo" width={100} height={24} priority />
+        <Heading mt={8}>AIレシピツクールヨ</Heading>
+        <Image
+          src="/vercel.svg"
+          alt="Vercel Logo"
+          width={100}
+          height={24}
+          priority
+        />
         <form>
           <Box mt={8}>
             <Textarea
