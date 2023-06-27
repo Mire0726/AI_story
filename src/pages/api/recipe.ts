@@ -28,7 +28,7 @@ export default async function recipe( // 追加: asyncキーワード
         },
         {
           role: ChatCompletionRequestMessageRoleEnum.User,
-          content: body.foods,
+          content: "玉ねぎ",
         },
       ],
     })
@@ -44,7 +44,7 @@ export default async function recipe( // 追加: asyncキーワード
 
   const result = response.data.choices[0];
 
-  res.status(200).json({ recipe: result.message!.content });
+  res.status(200).json({ recipe: result });
 }
 
 // import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";

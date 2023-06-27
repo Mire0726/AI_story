@@ -61,8 +61,8 @@ export default function Home() {
               rows={8}
               value={foods}
               onChange={(e) => setFoods(e.target.value)}
-              placeholder={`なす
-ぴーまん`}
+              placeholder={`なす'
+              ぴーまん`}
               required
             />
           </Box>
