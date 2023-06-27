@@ -1,8 +1,38 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Box, Button, Container, Heading, Textarea } from "@chakra-ui/react";
+import { useCallback, useState, FormEvent } from "react";
 
 export default function Home() {
+  const [foods, setFoods] = useState("");
+
+  const onSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      const data: GetRecipeRequestData = { foods };
+      const response = await fetch("/api/recipe", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).catch((error) => {
+        console.error(error);
+        return null;
+      });
+      if (!response) {
+        alert("エラーが発生しました。");
+        return;
+      }
+
+      const responseData: GetRecipeResponseData = await response.json();
+      setRecipe(responseData.recipe);
+    },
+    [foods]
+  );
+
   return (
     <>
       <Head>
@@ -25,6 +55,8 @@ export default function Home() {
             <Textarea
               name="foods"
               rows={8}
+              value={foods}
+              onChange={(e) => setFoods(e.target.value)}
               placeholder={`なす
 ぴーまん`}
               required
