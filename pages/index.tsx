@@ -2,9 +2,11 @@ import Head from "next/head";
 import Image from "next/image";
 import { Box, Button, Container, Heading, Textarea } from "@chakra-ui/react";
 import { useCallback, useState, FormEvent } from "react";
+import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";
 
 export default function Home() {
   const [foods, setFoods] = useState("");
+  const [recipe, setRecipe] = useState(""); // 追加
 
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
@@ -50,7 +52,9 @@ export default function Home() {
           height={24}
           priority
         />
-        <form>
+        <form onSubmit={onSubmit}>
+          {" "}
+          {/* 修正 */}
           <Box mt={8}>
             <Textarea
               name="foods"
