@@ -71,6 +71,11 @@ export default function Home() {
               AIにレシピを作ってもらう
             </Button>
           </Box>
+          {recipe !== "" && (
+            <Box mt={8} whiteSpace="pre-wrap" wordBreak="break-word">
+              {recipe}
+            </Box>
+          )}
         </form>
       </Container>
     </>

@@ -1,11 +1,13 @@
 import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";
 import { error } from "console";
 import type { NextApiRequest, NextApiResponse } from "next";
+
 import {
   ChatCompletionRequestMessageRoleEnum,
   Configuration,
   OpenAIApi,
 } from "openai";
+
 export default async function recipe( // 追加: asyncキーワード
   req: NextApiRequest,
   res: NextApiResponse<GetRecipeResponseData>
@@ -28,7 +30,7 @@ export default async function recipe( // 追加: asyncキーワード
         },
         {
           role: ChatCompletionRequestMessageRoleEnum.User,
-          content: body.foods,
+          content: "body.foods",
         },
       ],
     })
