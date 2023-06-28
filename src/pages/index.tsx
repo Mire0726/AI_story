@@ -29,11 +29,13 @@ export default function Home() {
         return;
       }
       const responseData: GetRecipeResponseData = await response.json();
-      // setRecipe(responseData.recipe);
-      setRecipe(JSON.stringify(responseData.recipe, null, 2)); // オブジェクトを文字列化
+
+      // レシピのみを取り出す
+      setRecipe(responseData.recipe.message.content);
 
       // const responseData: GetRecipeResponseData = await response.json();
-      // setRecipe(responseData.recipe);
+      // // setRecipe(responseData.recipe);
+      // setRecipe(JSON.stringify(responseData.recipe, null, 2)); // オブジェクトを文字列化
     },
     [foods]
   );

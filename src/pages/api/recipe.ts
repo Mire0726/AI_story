@@ -30,7 +30,7 @@ export default async function recipe( // 追加: asyncキーワード
         },
         {
           role: ChatCompletionRequestMessageRoleEnum.User,
-          content: "玉ねぎ",
+          content: "body.foods",
         },
       ],
     })
