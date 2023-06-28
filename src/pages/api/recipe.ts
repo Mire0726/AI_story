@@ -1,11 +1,11 @@
 import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";
+import { error } from "console";
 import type { NextApiRequest, NextApiResponse } from "next";
 import {
   ChatCompletionRequestMessageRoleEnum,
   Configuration,
   OpenAIApi,
 } from "openai";
-
 export default async function recipe( // 追加: asyncキーワード
   req: NextApiRequest,
   res: NextApiResponse<GetRecipeResponseData>
@@ -28,23 +28,31 @@ export default async function recipe( // 追加: asyncキーワード
         },
         {
           role: ChatCompletionRequestMessageRoleEnum.User,
-          content: "玉ねぎ",
+          content: body.foods,
         },
       ],
     })
-    .catch((error) => {
-      console.error(error);
-      return null;
-    });
 
-  if (!response) {
-    res.status(500).end("Error occured");
-    return;
-  }
+    .catch((error) => {
+      res.status(500).send(error);
+    });
 
   const result = response.data.choices[0];
 
   res.status(200).json({ recipe: result });
+
+  //   .catch((error) => {
+  //     console.error(error);
+  //     return null;
+  //   });
+  // if (!response) {
+  //   res.status(500).end("error");
+  //   return;
+  // }
+
+  // const result = response.data.choices[0];
+
+  // res.status(200).json({ recipe: result.message!.content });
 }
 
 // import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";
