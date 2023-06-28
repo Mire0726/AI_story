@@ -28,9 +28,12 @@ export default function Home() {
         alert("エラーが発生しました。");
         return;
       }
-
       const responseData: GetRecipeResponseData = await response.json();
-      setRecipe(responseData.recipe);
+      // setRecipe(responseData.recipe);
+      setRecipe(JSON.stringify(responseData.recipe, null, 2)); // オブジェクトを文字列化
+
+      // const responseData: GetRecipeResponseData = await response.json();
+      // setRecipe(responseData.recipe);
     },
     [foods]
   );
