@@ -1,6 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
-import { Box, Button, Container, Heading, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Textarea,
+  Center,
+  Spinner,
+} from "@chakra-ui/react";
 import { useCallback, useState, FormEvent } from "react";
 import { GetRecipeRequestData, GetRecipeResponseData } from "@/types/recipe";
 
@@ -8,9 +16,13 @@ export default function Home() {
   const [foods, setFoods] = useState("");
   const [recipe, setRecipe] = useState(""); // 追加
 
+  const [isSending, setIsSending] = useState(false);
+
   const onSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
+
+      setIsSending(true);
 
       const data: GetRecipeRequestData = { foods };
       const response = await fetch("/api/recipe", {
@@ -24,6 +36,9 @@ export default function Home() {
         console.error(error);
         return null;
       });
+
+      setIsSending(false);
+
       if (!response) {
         alert("エラーが発生しました。");
         return;
@@ -32,10 +47,6 @@ export default function Home() {
 
       // レシピのみを取り出す
       setRecipe(responseData.recipe.message.content);
-
-      // const responseData: GetRecipeResponseData = await response.json();
-      // // setRecipe(responseData.recipe);
-      // setRecipe(JSON.stringify(responseData.recipe, null, 2)); // オブジェクトを文字列化
     },
     [foods]
   );
@@ -72,9 +83,15 @@ export default function Home() {
             />
           </Box>
           <Box mt={4}>
-            <Button type="submit" colorScheme="blue">
-              AIにレシピを作ってもらう
-            </Button>
+            {isSending ? (
+              <Center>
+                <Spinner />
+              </Center>
+            ) : (
+              <Button type="submit" colorScheme="blue">
+                AIにレシピを作ってもらう
+              </Button>
+            )}
           </Box>
           {recipe !== "" && (
             <Box mt={8} whiteSpace="pre-wrap" wordBreak="break-word">
