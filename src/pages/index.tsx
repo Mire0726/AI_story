@@ -60,7 +60,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Container>
-        <Heading mt={8}>AIレシピツクールヨ</Heading>
+        <Heading mt={8}>AIお話しメーカー</Heading>
         <Image
           src="/vercel.svg"
           alt="Vercel Logo"
@@ -77,8 +77,8 @@ export default function Home() {
               rows={8}
               value={foods}
               onChange={(e) => setFoods(e.target.value)}
-              placeholder={`なす
-ぴーまん`}
+              placeholder={`母
+妹`}
               required
             />
           </Box>
@@ -89,7 +89,7 @@ export default function Home() {
               </Center>
             ) : (
               <Button type="submit" colorScheme="blue">
-                AIにレシピを作ってもらう
+                AIにお話しを作ってもらう
               </Button>
             )}
           </Box>

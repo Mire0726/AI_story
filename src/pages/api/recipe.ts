@@ -25,8 +25,7 @@ export default async function recipe( // 追加: asyncキーワード
       messages: [
         {
           role: ChatCompletionRequestMessageRoleEnum.System,
-          content:
-            "以下の食材を全て含めて作ることができる料理のレシピを教えて下さい。",
+          content: "以下の人物を全て含めて物語を180字で作ってください。",
         },
         {
           role: ChatCompletionRequestMessageRoleEnum.User,
